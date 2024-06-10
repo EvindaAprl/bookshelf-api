@@ -62,20 +62,22 @@ const getBookByIdHandler = (request, h) => {
 
   const book = books.filter((n) => n.id === id)[0];
 
-  if (book !== undefined) {
-    return {
-      status: 'success',
-      data: {
-        book,
-      },
-    };
+  if (book === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Buku tidak ditemukan',
+    });
+    response.code(404);
+    return response;
   }
 
   const response = h.response({
-    status: 'fail',
-    message: 'Buku tidak ditemukan',
+    status: 'success',
+    data: {
+      book,
+    },
   });
-  response.code(404);
+  response.code(200);
   return response;
 };
 
@@ -86,23 +88,6 @@ const editBookByIdHandler = (request, h) => {
     name, year, author, summary, publisher, pageCount, readPage, reading,
   } = request.payload;
   const updatedAt = new Date().toISOString();
-
-  const index = books.findIndex((book) => book.id === id);
-
-  if (index !== -1) {
-    books[index] = {
-      ...books[index],
-      name,
-      year,
-      author,
-      summary,
-      publisher,
-      pageCount,
-      readPage,
-      reading,
-      updatedAt,
-    };
-  }
 
   if (!name) {
     const response = h.response({
@@ -122,6 +107,8 @@ const editBookByIdHandler = (request, h) => {
     return response;
   }
 
+  const index = books.findIndex((book) => book.id === id);
+
   if (index === -1) {
     const response = h.response({
       status: 'fail',
@@ -129,6 +116,21 @@ const editBookByIdHandler = (request, h) => {
     });
     response.code(404);
     return response;
+  }
+
+  if (index !== -1) {
+    books[index] = {
+      ...books[index],
+      name,
+      year,
+      author,
+      summary,
+      publisher,
+      pageCount,
+      readPage,
+      reading,
+      updatedAt,
+    };
   }
 
   const response = h.response({
