@@ -16,8 +16,6 @@ const addBookHandler = (request, h) => {
     id, name, year, author, summary, publisher, pageCount, readPage, finished, reading, insertedAt, updatedAt,
   };
 
-  books.push(newBook);
-
   if (!name) {
     const response = h.response({
       status: 'fail',
@@ -30,12 +28,13 @@ const addBookHandler = (request, h) => {
   if (pageCount < readPage) {
     const response = h.response({
       status: 'fail',
-      message: '"Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
+      message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
     });
     response.code(400);
     return response;
   }
 
+  books.push(newBook);
   const response = h.response({
     status: 'success',
     message: 'Buku berhasil ditambahkan',
@@ -117,13 +116,13 @@ const editBookByIdHandler = (request, h) => {
   if (pageCount < readPage) {
     const response = h.response({
       status: 'fail',
-      message: '"Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount',
+      message: 'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount',
     });
     response.code(400);
     return response;
   }
 
-  if (!id) {
+  if (index === -1) {
     const response = h.response({
       status: 'fail',
       message: 'Gagal memperbarui buku. Id tidak ditemukan',
