@@ -1,6 +1,7 @@
 const { nanoid } = require('nanoid');
 const books = require('./books');
 
+//  API dapat menyimpan buku
 const addBookHandler = (request, h) => {
   const {
     name, year, author, summary, publisher, pageCount, readPage, reading,
@@ -45,19 +46,23 @@ const addBookHandler = (request, h) => {
   return response;
 };
 
+// API dapat menampilkan seluruh buku
 const getAllBooksHandler = (request, h) => {
   const { reading, finished, name } = request.query;
   let filteredBooks = books;
 
+  //  API dapat menampilkan seluruh buku yang mengandung nama berdasarkan nilai yang diberikan pada query
   if (name !== undefined) {
     const lowerCaseName = name.toLowerCase();
     filteredBooks = books.filter((book) => book.name.toLowerCase().includes(lowerCaseName));
   }
 
+  //  API dapat menampilkan seluruh buku yang sedang dibaca atau tidak
   if (reading !== undefined) {
     filteredBooks = books.filter((book) => book.reading === (reading === '1'));
   }
 
+  //  API dapat menampilkan seluruh buku yang sudah selesai atau belum selesai dibaca
   if (finished !== undefined) {
     filteredBooks = books.filter((book) => book.finished === (finished === '1'));
   }
@@ -76,6 +81,7 @@ const getAllBooksHandler = (request, h) => {
   return response;
 };
 
+// API dapat menampilkan detail buku
 const getBookByIdHandler = (request, h) => {
   const { id } = request.params;
 
@@ -100,6 +106,7 @@ const getBookByIdHandler = (request, h) => {
   return response;
 };
 
+// API dapat mengubah data buku
 const editBookByIdHandler = (request, h) => {
   const { id } = request.params;
 
@@ -160,6 +167,7 @@ const editBookByIdHandler = (request, h) => {
   return response;
 };
 
+// API dapat menghapus buku
 const deleteBookByIdHandler = (request, h) => {
   const { id } = request.params;
 
