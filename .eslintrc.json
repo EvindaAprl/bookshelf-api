@@ -13,6 +13,7 @@
     "rules": {
         "no-console": "off",
         "linebreak-style":"off",
-        "no-restricted-modules":"off"
+        "no-restricted-modules":"off",
+        "max-len": "off"
     }
 }
