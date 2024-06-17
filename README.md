@@ -10,6 +10,12 @@ Kriteria Utama:
 7. API dapat menghapus buku melalui route DELETE /books/{bookId}.
 
 Kriteria Tambahan pada Route GET /books:
-1. Menampilkan seluruh buku yang mengandung nama berdasarkan nilai yang diberikan pada query /books?name=”{bookName}”.
-2. Menampilkan buku yang sedang dibaca atau tidak melalui query /books?reading=0 atau /books?reading=1.
-3. Menampilkan buku yang sudah selesai dibaca atau belum melalui query /books?finished=0 atau /books?finished=1.
+1. Menampilkan seluruh buku yang mengandung nama berdasarkan nilai yang diberikan pada query '/books?name=”{bookName}”'.
+2. Menampilkan buku yang sedang dibaca atau tidak melalui query '/books?reading=0' atau '/books?reading=1'.
+3. Menampilkan buku yang sudah selesai dibaca atau belum melalui query '/books?finished=0' atau '/books?finished=1'.
+
+**Melakukan Pengujian Melalui Postman:**
+1. Unduh file 'Bookshelf-API-Test.postman_collection.json' dan 'Bookshelf-API-Test.postman_environment.json'.
+2. Buka aplikasi Postman, klik tombol 'Import' di kanan atas.
+3. Klik tombol 'Upload Files', lalu pilih kedua file tadi.
+4. Lakukan pengujian pada Collection dengan klik tombol 'Run'.
